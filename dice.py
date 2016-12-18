@@ -7,10 +7,12 @@ def roll(die):
 		dice, sides = [int(x) for x in die.split('d')]
 	except (ValueError, TypeError) as e:
 		print(e)
-		raise DiceParserException(die)
+		raise DiceParserException(die + ' (bad syntax)')
 	else:
 		if dice < 0 or sides < 0:
-			raise DiceParserException(die)
+			raise DiceParserException(die + ' (values must be positive)')
+		if dice > 16384 or sides > 1024:
+			raise DiceParserException(die + ' (dice too large)')
 	return sum([randrange(sides) + 1 for x in range(dice)])
 	
 def parse(msg):
@@ -22,7 +24,7 @@ def parse(msg):
 				rolls.append((roll(tokens[i+1]), tokens[i+1]))
 			except DiceParserException as e:
 				print('bad roll:', e)
-				rolls.append(('error', tokens[i+1]))
+				rolls.append(('error', str(e)))
 	return rolls
 
 def dice_message(rolls, msg):

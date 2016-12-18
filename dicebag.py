@@ -13,8 +13,9 @@ async def on_message(msg):
 	rolls = dice.parse(msg.content)
 	if rolls:
 		await client.send_message(
-			msg.channel, dice.dice_message(rolls, msg)
-	)
+			msg.channel,
+			dice.dice_message(rolls, msg)
+		)
 
-client.run(bot_token)	
+client.run(bot_token)
 print('client started')
