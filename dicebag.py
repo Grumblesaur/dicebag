@@ -10,7 +10,7 @@ print("Bot connected.")
 
 @client.event
 async def on_message(msg):
-	rolls = dice.parse(msg.content)
+	rolls = dice.parse_with_math(msg.content)
 	if rolls:
 		await client.send_message(
 			msg.channel,
