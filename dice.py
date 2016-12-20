@@ -43,7 +43,7 @@ def parse_with_math(msg):
 	try:
 		modsym = ('','+')['+' in die] + ('', '-')['-' in die]
 		if modsym == '+-':
-			raise DiceParserException('oh my fucking god')
+			raise ValueError('operation +- not supported')
 		# got 99 problems and regexes are all of them
 		die, modint = (re.split('[\-\+]+', die), (die, 0))[modsym == '']
 	except (TypeError, ValueError) as e:
@@ -53,35 +53,38 @@ def parse_with_math(msg):
 	die = die.split('d')
 	try:
 		dice, sides, drop = (die[:] + [0], die[:])[len(die) == 3]
+		dice, sides, drop, modint = [
+			int(x) for x in (dice, sides, drop, modint)
+		]
 	except Exception as e:
 		print(e); raise DiceParserException('bad d syntax')
 	
-	results = []
-	for i in range(repeat):
-		results.append(('%s.' % str(i+1), roll_with_drop(
-			int(dice), int(sides), int(drop), int(modint), modsym)
-			)
-		)
-	
-	return results
+	return [roll_with_drop(dice, sides, drop, modint, modsym)
+		for i in range(repeat)
+	]
 	
 def parse(msg):
-	tokens = msg.casefold().split()
+	tokens = msg.casefold().split('!roll')
+	tokens = [token.strip() for token in tokens if token]
 	rolls = []
-	for i in range(len(tokens) - 1):
-		if tokens[i] == '!roll':
-			try:
-				rolls.append((roll(tokens[i+1]), tokens[i+1]))
-			except DiceParserException as e:
-				print('bad roll:', e)
-				rolls.append(('error', str(e)))
+	for token in tokens:
+		try:
+			rolls.append((token, parse_with_math(token)))
+		except DiceParserException as e:
+			print('bad roll:', token, e)
+			rolls.append((token, e))
 	return rolls
 
-def dice_message(rolls, msg):
+def dice_message(rolls, msg=None):
 	try:
 		username = msg.author.nick
 	except AttributeError as e:
-		username = msg.author.name
-	return ('User %s rolled:\n' % username) + '\n'.join(
-		['%s (%s)' % roll for roll in rolls]
+		username = 'x' # msg.author.name
+	return 'User %s rolled:\n%s' % (
+		username,
+		'\n'.join(['\n'.join(
+				[result[0]]
+				+ ['  %s' % die for die in result[1]]
+			) for result in rolls]
+		)
 	)
