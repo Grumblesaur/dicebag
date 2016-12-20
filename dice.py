@@ -3,19 +3,6 @@ from random import randrange
 class DiceParserException(Exception):
 	pass
 
-def roll(die):
-	try:
-		dice, sides = [int(x) for x in die.split('d')]
-	except (ValueError, TypeError) as e:
-		print(e)
-		raise DiceParserException(die + ' (bad syntax)')
-	else:
-		if dice < 0 or sides < 0:
-			raise DiceParserException(die + ' (values must be positive)')
-		if dice > 16384 or sides > 1024:
-			raise DiceParserException(die + ' (dice too large)')
-	return sum([randrange(sides) + 1 for x in range(dice)])
-	
 def roll_with_drop(dice, sides, drop, addend, sign):
 	# no negative args please
 	if dice < 0 or sides < 0 or drop < 0:
@@ -30,8 +17,7 @@ def roll_with_drop(dice, sides, drop, addend, sign):
 	return {'+' : roll + addend, '-' : roll - addend, '': roll}[sign]
 
 def parse_with_math(msg):
-	command = msg.replace('!roll', '')
-	command = command.replace(' ','')
+	command = msg.replace(' ','')
 	#grab repetitions
 	try:
 		die, repeat = ((command, 1), command.split('^'))['^' in command]
@@ -72,7 +58,6 @@ def parse(msg):
 			rolls.append((token, parse_with_math(token)))
 		except DiceParserException as e:
 			print('bad roll:', token, e)
-			rolls.append((token, e))
 	return rolls
 
 def dice_message(rolls, msg=None):
