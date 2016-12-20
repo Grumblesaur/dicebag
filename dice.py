@@ -50,6 +50,8 @@ def parse_with_math(msg):
 	]
 	
 def parse(msg):
+	if '!roll' not in msg:
+		return [] # early bailout
 	tokens = msg.casefold().split('!roll')
 	tokens = [token.strip() for token in tokens if token]
 	rolls = []
