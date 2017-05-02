@@ -1,0 +1,3 @@
+class DiceParserException(Exception):
+	pass
+
