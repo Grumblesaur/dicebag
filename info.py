@@ -36,7 +36,7 @@ helptext = {
 }
 
 def parse(msg):
-	if "!help" not in msg:
+	if "!help" not in msg or "!help <" in msg:
 		return []
 	tokens = [token.strip() for token in msg.split("!help")]
 	try:

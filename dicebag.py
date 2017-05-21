@@ -31,7 +31,7 @@ async def on_message(msg):
 			dice.dice_message(rolls, msg)
 		)
 	if initiative:
-		await client send_message(
+		await client.send_message(
 			msg.channel,
 			turns.turn_message(initiative)
 		)
