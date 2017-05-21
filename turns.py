@@ -160,6 +160,7 @@ def parse(msg):
 	
 	if tokens[0] == "delete":
 		del tracker[tokens[1]]
+		return [("Deleted turn order %s." % tokens[1], "delete")]
 	
 	return []
 
