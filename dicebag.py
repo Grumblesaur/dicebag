@@ -27,6 +27,7 @@ async def on_message(msg):
 		await client send_message(
 			msg.channel,
 			turns.turn_message(initiative)
+		)
 
 client.run(bot_token)
 print('client started')
