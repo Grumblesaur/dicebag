@@ -1,3 +1,5 @@
+from db import *
+
 translation = {
 	'altmer' : 'Altmer',
 	'alt' : 'Altmer',

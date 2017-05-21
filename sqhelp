@@ -1,0 +1,3 @@
+To log into postgres, type:
+	$ sudo -u postgres psql
+
