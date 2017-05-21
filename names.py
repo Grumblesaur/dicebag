@@ -42,7 +42,7 @@ def parse(msg):
 	except IndexError as e:
 		return []
 	
-	race, flags = command[0], command[1:]
+	race, flags = translation[command[0]], command[1:]
 	try:
 		flags = [translation[flag.lower()] for flag in flags]
 	except KeyError as e:
@@ -61,9 +61,11 @@ def name_query(race, flag):
 		+ 'random() < 0.01 limit 1',
 		(race, flag)
 	)
-	
+	print(query)
 	cur.execute(query)
-	return cur.fetchall()[0]
+	results = cur.fetchall()
+	print(results)
+	return results[0][0]
 	
 
 
