@@ -50,7 +50,7 @@ def parse(msg):
 		return ['no names for race `%s`' % e]
 	
 	unique = list(set(flags))
-	
+	print([(flag, flags.count(flag)) for flag in unique])
 	names_by_type = { }
 	for flag in unique:
 		names_by_type[flag] = name_query(race, flag, flags.count(flag))
@@ -68,18 +68,17 @@ def name_query(race, flag, count):
 	cur = con.cursor()
 	
 	query = cur.mogrify(
-		'select name from names where race = %s and nametype = %s and '
-		+ 'random() < 0.01 limit %s',
+		'select name from names where race = %s and nametype = %s'
+		+ 'order by random() limit %s',
 		(race, flag, count)
 	)
 	cur.execute(query)
 	results = cur.fetchall()
-	try:
-		out = list(results[0])
-	except IndexError as e:
-		out = []
+	print(results)
+	out = [ ]
+	for t in results:
+		out += list(t)
 	return out
-	
 	
 
 
