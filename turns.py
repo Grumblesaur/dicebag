@@ -164,7 +164,7 @@ def parse(msg):
 	
 	return []
 
-def turn_message(pairs):
+def message(pairs):
 	out = "%s (%s)" % pairs[0]
 	out = out + '\n' + '\n'.join(
 		["\t%s (%s)" % p for p in pairs[1:]]

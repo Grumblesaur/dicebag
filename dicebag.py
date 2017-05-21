@@ -14,26 +14,36 @@ print("Bot connected.")
 async def on_message(msg):
 	assistance = info.parse(msg.content)
 	rolls = dice.parse(msg.content)
+	nomen = names.parse(msg.content)
 	try:
 		initiative = turns.parse(msg.content)
 	except IndexError as e:
 		initiative = [("Invalid keyword or number of arguments.", "error")]
 	except KeyError as e:
 		initiative = [("No tracker with given identifier.", "error")]
+
 	if assistance:
 		await client.send_message(
 			msg.channel,
-			info.help_message(assistance)
+			info.message(assistance)
 		)
+
 	if rolls:
 		await client.send_message(
 			msg.channel,
-			dice.dice_message(rolls, msg)
+			dice.message(rolls, msg)
 		)
+	
+	if nomen:
+		await client.send_message(
+			msg.channel,
+			names.message(nomen)
+		)
+	
 	if initiative:
 		await client.send_message(
 			msg.channel,
-			turns.turn_message(initiative)
+			turns.message(initiative)
 		)
 	
 client.run(bot_token)

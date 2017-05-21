@@ -22,7 +22,7 @@ def parse(msg):
 			print('bad roll:', token, e)
 	return rolls
 
-def dice_message(rolls, msg=None):
+def message(rolls, msg=None):
 	try:
 		username = msg.author.nick
 	except AttributeError as e:
