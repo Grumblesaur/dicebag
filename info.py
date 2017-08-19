@@ -52,7 +52,7 @@ def parse(msg):
 		out = helptext['']
 	return out
 
-def help_message(lines):
+def message(lines):
 	return '\n\t'.join(lines)
 
 
