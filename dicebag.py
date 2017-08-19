@@ -6,6 +6,7 @@ import dice
 import turns
 import info
 import names
+import char
 
 client = discord.Client(max_messages=128)
 
