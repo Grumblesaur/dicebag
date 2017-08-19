@@ -100,10 +100,13 @@ def parse_two(tokens):
 	return out
 
 def parse_one(tokens):
-	try:
-		out = [tokens[0]] + [pair for pair in tracker[tokens[0]].items()]
-	except KeyError as e:
-		out = ['char `%s\' does not exist' % tokens[0]]
+	if tokens[0] in ('all', '*'):
+		out = ['\n'.join([name for name in tracker.keys()])]
+	else:
+		try:
+			out = [tokens[0]] + [pair for pair in tracker[tokens[0]].items()]
+		except KeyError as e:
+			out = ['char `%s\' does not exist' % tokens[0]]
 	return out
 
 def message(feedback):
