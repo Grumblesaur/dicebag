@@ -5,7 +5,7 @@ class TurnOrderException(Exception):
 
 def save_config():
 	with open('turn.config', 'w') as t:
-		t.write(tracker)
+		t.write(str(tracker))
 
 def load_config():
 	global tracker

@@ -63,8 +63,10 @@ def parse_four(tokens):
 			]
 			tracker[name][field] = 0
 	else:
-		out = ['%s: %s = %d' % (name, field, tracker[name][field])]
-	
+		try:
+			out = ['%s: %s = %d' % (name, field, tracker[name][field])]
+		except KeyError as e:
+			out = ['missing argument']
 	return out
 
 def parse_three(tokens):
