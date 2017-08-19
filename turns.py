@@ -3,6 +3,19 @@ tracker = { }
 class TurnOrderException(Exception):
 	pass
 
+def save_config():
+	with t_config as open('turn.config', 'w')
+		t_config.write(tracker)
+
+def load_config():
+	global tracker
+	try:
+		with t_config as open('turn.config', 'r')
+			tracker = eval(t_config.read())
+	except Exception as e:
+		print(e)
+		tracker = { }
+
 class turn_order(object):
 	def __init__(self):
 		""" Creates a turn order object where

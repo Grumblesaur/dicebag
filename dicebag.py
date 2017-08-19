@@ -6,23 +6,30 @@ import dice
 import turns
 import info
 import names
+import char
 
 client = discord.Client(max_messages=128)
 
 print("Bot connected.")
+
+char.load_config()
+turns.load_config()
+char_dirty = False
+turns_dirty = False
 
 @client.event
 async def on_message(msg):
 	assistance = info.parse(msg.content)
 	rolls = dice.parse(msg.content)
 	nomen = names.parse(msg.content)
+	stats = char.parse(msg.content)
 	try:
 		initiative = turns.parse(msg.content)
 	except IndexError as e:
 		initiative = [("Invalid keyword or number of arguments.", "error")]
 	except KeyError as e:
 		initiative = [("No tracker with given identifier.", "error")]
-
+	
 	if assistance:
 		await client.send_message(
 			msg.channel,
@@ -46,6 +53,21 @@ async def on_message(msg):
 			msg.channel,
 			turns.message(initiative)
 		)
+	
+	if stats:
+		await client.send_message(
+			msg.channel,
+			char.message(stats)
+		)
+	
+	if "!dicebag save" in msg.content:
+		char.save_config()
+		turns.save_config()
+		await client.send_message(
+			msg.channel,
+			"Configuration saved."
+		)	
+
 for attempt in range(100):
 	try:	
 		client.run(bot_token)
@@ -55,3 +77,6 @@ for attempt in range(100):
 		print('client started')
 else:
 	print("unrecoverable")
+
+client.run(bot_token)
+print('client started')
