@@ -101,7 +101,11 @@ def parse_two(tokens):
 
 def parse_one(tokens):
 	if tokens[0] in ('all', '*'):
-		out = ['\n'.join([name for name in tracker.keys()])]
+		out = ['all tracked chars:\n'
+			+ '\n'.join(
+				[name for name in tracker.keys()]
+			)
+		]
 	else:
 		try:
 			out = [tokens[0]] + [pair for pair in tracker[tokens[0]].items()]
