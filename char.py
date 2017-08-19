@@ -81,14 +81,15 @@ def parse_two(tokens):
 	elif first in keywords['~']:
 		try:
 			del tracker[second]
+			out = ['removed char `%\'' % second]
 		except KeyError as e:
 			out = []
-		else:
-			out = ['removed char `%\'' % second]
 	else:
 		if first in tracker.keys():
 			if second in tracker[first].keys():
-				out = ['%s: %s = %d' % first, second, tracker[first][second]]
+				out = ['%s: %s = %d' % (
+					first, second, tracker[first][second])
+				]
 			else:
 				tracker[first][second] = 0
 				out = ['field `%s\' did not exist for %s; defaulting to 0'
