@@ -14,8 +14,6 @@ print("Bot connected.")
 
 char.load_config()
 turns.load_config()
-char_dirty = False
-turns_dirty = False
 
 @client.event
 async def on_message(msg):
