@@ -81,7 +81,7 @@ def parse_two(tokens):
 	elif first in keywords['~']:
 		try:
 			del tracker[second]
-			out = ['removed char `%\'' % second]
+			out = ['removed char `%s\'' % second]
 		except KeyError as e:
 			out = []
 	else:
