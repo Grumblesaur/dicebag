@@ -46,6 +46,12 @@ async def on_message(msg):
 			msg.channel,
 			turns.message(initiative)
 		)
-	
-client.run(bot_token)
-print('client started')
+for attempt in range(100):
+	try:	
+		client.run(bot_token)
+	except ConnectionResetError as e:
+		print(e)
+	else:
+		print('client started')
+else:
+	print("unrecoverable")
