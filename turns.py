@@ -4,14 +4,14 @@ class TurnOrderException(Exception):
 	pass
 
 def save_config():
-	with t_config as open('turn.config', 'w'):
-		t_config.write(tracker)
+	with open('turn.config', 'w') as t:
+		t.write(tracker)
 
 def load_config():
 	global tracker
 	try:
-		with t_config as open('turn.config', 'r'):
-			tracker = eval(t_config.read())
+		with open('turn.config', 'r') as t:
+			tracker = eval(t.read())
 	except Exception as e:
 		print(e)
 		tracker = { }
