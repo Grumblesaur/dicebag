@@ -8,6 +8,7 @@ def save_config():
 		t_config.write(tracker)
 
 def load_config():
+	global tracker
 	try:
 		with t_config as open('turn.config', 'r')
 			tracker = eval(t_config.read())

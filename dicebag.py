@@ -22,13 +22,14 @@ async def on_message(msg):
 	assistance = info.parse(msg.content)
 	rolls = dice.parse(msg.content)
 	nomen = names.parse(msg.content)
+	stats = char.parse(msg.content)
 	try:
 		initiative = turns.parse(msg.content)
 	except IndexError as e:
 		initiative = [("Invalid keyword or number of arguments.", "error")]
 	except KeyError as e:
 		initiative = [("No tracker with given identifier.", "error")]
-
+	
 	if assistance:
 		await client.send_message(
 			msg.channel,
@@ -53,7 +54,13 @@ async def on_message(msg):
 			turns.message(initiative)
 		)
 	
-	if "dicebag save" in msg.content:
+	if stats:
+		await client.send_message(
+			msg.channel,
+			char.message(stats)
+		)
+	
+	if "!dicebag save" in msg.content:
 		char.save_config()
 		turns.save_config()
 		await client.send_message(
