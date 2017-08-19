@@ -12,6 +12,11 @@ client = discord.Client(max_messages=128)
 
 print("Bot connected.")
 
+char.load_config()
+turns.load_config()
+char_dirty = False
+turns_dirty = False
+
 @client.event
 async def on_message(msg):
 	assistance = info.parse(msg.content)
@@ -47,6 +52,14 @@ async def on_message(msg):
 			msg.channel,
 			turns.message(initiative)
 		)
+	
+	if "dicebag save" in msg.content:
+		char.save_config()
+		turns.save_config()
+		await client.send_message(
+			msg.channel,
+			"Configuration saved."
+		)	
 	
 client.run(bot_token)
 print('client started')

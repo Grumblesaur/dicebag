@@ -3,11 +3,11 @@ tracker = { }
 class TurnOrderException(Exception):
 	pass
 
-def save_turn_config():
+def save_config():
 	with t_config as open('turn.config', 'w')
 		t_config.write(tracker)
 
-def load_turn_config():
+def load_config():
 	try:
 		with t_config as open('turn.config', 'r')
 			tracker = eval(t_config.read())
