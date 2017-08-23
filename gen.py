@@ -39,6 +39,21 @@ def parse(msg):
 	full_name = '-'.join(forename + surname).lower()
 	
 	stats = dice.parse('!roll 4d6l1^6')[0][1]
-	print(full_name)
-	return stats
 	
+	new_character = {
+		full_name : {
+			'strength'     : stats[0],
+			'dexterity'    : stats[1],
+			'constitution' : stats[2],
+			'intelligence' : stats[3],
+			'wisdom'       : stats[4],
+			'charisma'     : stats[5]
+		}
+	}
+	
+	char.tracker = {char.tracker**, new_character**}
+	
+	return ["new character added to char tracker: %s" % full_name]
+	
+def message(feedback):
+	return feedback[0]

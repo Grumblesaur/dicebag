@@ -7,6 +7,7 @@ import turns
 import info
 import names
 import char
+import gen
 
 client = discord.Client(max_messages=128)
 
@@ -21,6 +22,7 @@ async def on_message(msg):
 	rolls = dice.parse(msg.content)
 	nomen = names.parse(msg.content)
 	stats = char.parse(msg.content)
+	new_character = gen.parse(msg.content)
 	try:
 		initiative = turns.parse(msg.content)
 	except IndexError as e:
@@ -56,6 +58,12 @@ async def on_message(msg):
 		await client.send_message(
 			msg.channel,
 			char.message(stats)
+		)
+	
+	if new_character:
+		await client.send_messaage(
+			msg.channel,
+			gen.message(new_character)
 		)
 	
 	if "!dicebag save" in msg.content:
