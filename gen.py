@@ -38,7 +38,7 @@ def parse(msg):
 	surname = names.name_query(race, 's', 1)
 	full_name = '-'.join(forename + surname).lower()
 	
-	stats = dice.parse('!roll 4d6l1^6')[1][1]
+	stats = dice.parse('!roll 4d6l1^6')[0][1]
 	
 	
 	
