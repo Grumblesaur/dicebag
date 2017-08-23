@@ -28,6 +28,8 @@ helptext = {
 		"roll",
 		"initiative",
 		"name",
+		"char",
+		"gen",
 		"type '!help <keyword>' for more information"
 	],
 	'char' : [
@@ -48,9 +50,23 @@ helptext = {
 		"substitutions: add|inc|increment|plus|+, subtract|dec|decrement|minus|"
 			+ "-, set|:|=, create|new|make, delete|destroy|~" 
 	],
+	'gen' : [
+		"valid operations:",
+		"(no arguments)  : adds a character of random race and gender to the "
+			+ "tracker with six ability scores",
+		"<race>          : adds a character of <race> and random gender to the "
+			+ "tracker with six ability scores",
+		"<race> <gender> : adds a character of <race> and <gender> to the "
+			+ "tracker with six ability scores"
+	],
 	'name' : [
-		"coming soon"
-	]
+		"valid operations:",
+		"<race> <nametype> : generates a name of <race> from <nametype> "
+			+ "category",
+		"races are: Altmer, Argonian, Bosmer, Breton, Dunmer, Imperial, "
+			+ "Nord, Orc, Redguard",
+		"nametypes are: male, female, surname"
+	],
 }
 
 def parse(msg):
