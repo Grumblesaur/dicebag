@@ -61,7 +61,7 @@ async def on_message(msg):
 		)
 	
 	if new_character:
-		await client.send_messaage(
+		await client.send_message(
 			msg.channel,
 			gen.message(new_character)
 		)
