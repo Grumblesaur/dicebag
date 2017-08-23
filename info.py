@@ -30,6 +30,24 @@ helptext = {
 		"name",
 		"type '!help <keyword>' for more information"
 	],
+	'char' : [
+		"valid operations:",
+		"create <char-name> : adds a character to the tracker",
+		"delete <char-name> : removes a character from the tracker",
+		"<char-name>        : view <char-name>'s stat array",
+		"all                : view the names of all characters in the tracker",
+		"<char-name> <field-name> : create or view character's value for "
+			+ "<field-name>",
+		"<char-name> <field-name> set <number> : change character's value for "
+			+ "<field-name> to <number>",
+		"<char-name> <field-name> add [<number>] : add <number> to character's "
+			+ "value for <field-name> or add 1 if <number> omitted>",
+		"<char-name> <field-name> subtract [<number>] : subtract <number> from "
+			+ "character's value for <field-name> or subtract 1 if <number> "
+			+ " omitted",
+		"substitutions: add|inc|increment|plus|+, subtract|dec|decrement|minus|"
+			+ "-, set|:|=, create|new|make, delete|destroy|~" 
+	],
 	'name' : [
 		"coming soon"
 	]
