@@ -30,13 +30,13 @@ def parse(msg):
 	gender = names.translation[random.choice(genders)]
 	
 	if argc >= 1:
-		race = names.translation[token[0]] if token[0] in races else race
+		race = names.translation[tokens[0]] if tokens[0] in races else race
 	if argc >= 2:
-		gender = names.translation[token[1]] if token[1] in genders else gender
+		gender = names.translation[tokens[1]] if tokens[1] in genders else gender
 	
 	forename = names.name_query(race, gender, 1)
 	surname = names.name_query(race, 's', 1)
-	full_name = '-'.join(forename + surname).lower()
+	full_name = '-'.join(forename + surname).lower().replace(' ', '-')
 	
 	stats = dice.parse('!roll 4d6l1^6')[0][1]
 	
@@ -51,7 +51,7 @@ def parse(msg):
 		}
 	}
 	
-	char.tracker = {char.tracker**, new_character**}
+	char.tracker[full_name] = new_character[full_name]
 	
 	return ["new character added to char tracker: %s" % full_name]
 	
