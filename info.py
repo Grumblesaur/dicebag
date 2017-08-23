@@ -56,7 +56,7 @@ helptext = {
 def parse(msg):
 	if "!help" not in msg or "!help <" in msg:
 		return []
-	tokens = [token.strip() for token in msg.split("!help")]
+	tokens = [token.strip() for token in msg.casefold().split("!help")]
 	try:
 		keyword = tokens[1]
 	except IndexError as e:
