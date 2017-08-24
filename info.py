@@ -30,7 +30,10 @@ helptext = {
 		"name",
 		"char",
 		"gen",
-		"type '!help <keyword>' for more information"
+		"type '!help <keyword>' for more information",
+		"currently all data and commands are accessible to all users of this "
+			+ "system; servers, channels, and users are not distinct",
+		"please be respectful of data that isn't yours"
 	],
 	'char' : [
 		"valid operations:",
