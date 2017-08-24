@@ -121,7 +121,7 @@ def parse(msg):
 	except IndexError as e:
 		return [
 			("active turn order trackers:",
-				""
+				"no argument"
 			)
 		] + list(zip(list(tracker.keys()), [
 				len(tracker[l]) for l in tracker.keys()
