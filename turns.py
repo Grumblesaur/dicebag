@@ -118,7 +118,11 @@ def parse(msg):
 	tokens = msg.split("!initiative")[1].split()
 	tokens[1] = tokens[1].lower()
 	if not tokens:
-		return []
+		return [
+			("active turn order trackers:\n\t" + '\n\t'.join(tracker.keys()),
+				"none"
+			)
+		]
 	
 	if tokens[0] == "create":
 		tracker[tokens[1]] = turn_order()
