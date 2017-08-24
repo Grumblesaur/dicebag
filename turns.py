@@ -120,10 +120,13 @@ def parse(msg):
 		tokens[1] = tokens[1].lower()
 	except IndexError as e:
 		return [
-			("active turn order trackers:\n\t",
-				"none"
+			("active turn order trackers:",
+				""
 			)
-		] + list(zip(list(tracker.keys()), [len(l) for l in tracker.keys()]))
+		] + list(zip(list(tracker.keys()), [
+				len(tracker[l]) for l in tracker.keys()
+			]
+		))
 	
 	if tokens[0] == "create":
 		tracker[tokens[1]] = turn_order()
