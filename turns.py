@@ -123,7 +123,7 @@ def parse(msg):
 			("active turn order trackers:\n\t",
 				"none"
 			)
-		] + list(tracker.keys())
+		] + list(zip(list(tracker.keys()), [len(l) for l in tracker.keys()]))
 	
 	if tokens[0] == "create":
 		tracker[tokens[1]] = turn_order()
