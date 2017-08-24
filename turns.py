@@ -115,9 +115,10 @@ class turn_order(object):
 def parse(msg):
 	if "!initiative" not in msg:
 		return []
-	tokens = msg.split("!initiative")[1].split()
-	tokens[1] = tokens[1].lower()
-	if not tokens:
+	try:
+		tokens = msg.split("!initiative")[1].split()
+		tokens[1] = tokens[1].lower()
+	except IndexError as e:
 		return [
 			("active turn order trackers:\n\t" + '\n\t'.join(tracker.keys()),
 				"none"
