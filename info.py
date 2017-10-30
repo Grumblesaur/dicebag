@@ -1,13 +1,15 @@
 helptext = {
 	'roll' : [
-		"valid operations:",
+		"valid operations (in order of precedence):",
 		"d : binary operator, for a roll MdN, rolls M dice each with N sides",
 		"l : with d as MdNlX, drops the lowest X dice from the MdN roll",
 		"h : with h as MdNhX, drops the highest X dice from the MdN roll",
+		"@ : binary operator, raises its left operand to the power of its right",
 		"* : binary operator, multiplies its operands",
 		"/ : binary operator, floor-divides its left operand by its right",
 		"+ : binary operator, adds its operands",
 		"- : binary operator, subtracts its right operator from its left",
+		"$ : binary operator, concatenates digits of its operands left-to-right",
 		"^ : repetition marker, when given roll^Y, repeats the roll Y times"
 	],
 	'initiative' : [
