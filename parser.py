@@ -61,9 +61,9 @@ def p_expr_bin(p):
              | expr '@' expr
              | expr 'd' expr
     '''
-	elif p[2] == '=':
+	if p[2] == '=':
 		p[0] = p[1] == p[3]
-	if p[2] == '#':
+	elif p[2] == '#':
 		p[0] = p[1].maximum(p[3])
 	elif p[2] == '_':
 		p[0] = p[1].minimum(p[3])
