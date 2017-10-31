@@ -3,7 +3,11 @@ from DiceValue import DiceValue
 from dice_error import DiceParserException
 
 literals = [
-	'+', '-', '(', ')', '*', '/', '%', '@', '$', 'd', 'l', 'h'
+	'+', '-', '(', ')',
+	'*', '/', '%', '@',
+	'$', 'd', 'l', 'h',
+	'#', '_', '~', '=',
+	'!'
 ]
 
 tokens = ('NUMBER',)
@@ -25,10 +29,13 @@ def t_error(t):
 	raise DiceParserException("Illegal character `%s'" % t.value[0])
 
 precedence = (
+	('left', '='),
+	('left', '#', '_'),
 	('left', '$'),
 	('left', '+', '-'),
 	('left', '*', '/', '%'),
-	('left', '@'),
+	('right', '@', '~'),
+	('right', '!'),
 	('nonassoc', 'h', 'l'),
 	('left', 'd'),
 )
@@ -36,17 +43,31 @@ precedence = (
 import ply.lex as lex
 lex.lex()
 
+def p_expr_un(p):
+	''' expr : expr ! '''
+	p[0] = p[1].factorial()
+
 def p_expr_bin(p):
-	''' expr : expr '$'  expr
-             | expr '+'  expr
-             | expr '-'  expr
-             | expr '*'  expr
-             | expr '/'  expr
-             | expr '%'  expr
-             | expr '@'  expr
-             | expr 'd'  expr
+	''' expr : expr '=' expr
+             | expr '#' expr
+             | expr '_' expr
+             | expr '$' expr
+             | expr '+' expr
+             | expr '-' expr
+             | expr '*' expr
+             | expr '/' expr
+             | expr '%' expr
+             | expr '~' expr
+             | expr '@' expr
+             | expr 'd' expr
     '''
-	if p[2] == '$':
+	if p[2] == '#':
+		p[0] = p[1].maximum(p[3])
+	elif p[2] == '_':
+		p[0] = p[1].minimum(p[3])
+	elif p[2] == '=':
+		p[0] = p[1] == p[3]
+	elif p[2] == '$':
 		p[0] = p[1].concatenate(p[3])
 	elif p[2] == '+':
 		p[0] = p[1] + p[3]
@@ -58,8 +79,10 @@ def p_expr_bin(p):
 		p[0] = p[1] // p[3]
 	elif p[2] == '%':
 		p[0] = p[1] % p[3]
+	elif p[2] == '~':
+		p[0] = p[1].logarithm(p[3])
 	elif p[2] == '@':
-		p[0] = p[1] @ p[3]
+		p[0] = p[1] ** p[3]
 	elif p[2] == 'd':
 		p[0] = p[1].die(p[3])
 

@@ -1,6 +1,7 @@
 from dice_error import DiceParserException
 from random import randint
-
+from math import log
+from math import factorial as fact
 
 class DiceValue(object):
 	def __init__(self, number):
@@ -47,10 +48,22 @@ class DiceValue(object):
 	def __mod__(self, other):
 		return DiceValue(self.value % other.value)
 	
-	def __matmul__(self, other):
+	def __pow__(self, other):
 		return DiceValue(self.value ** other.value)
 	
+	def maximum(self, other):
+		return DiceValue(max(self.value, other.value))
 	
+	def minimum(self, other):
+		return DiceValue(min(self.value, other.value))
+	
+	def logarithm(self, other):
+		return DiceValue(int(log(other, self)))
+	
+	def __eq__(self, other):
+		return self if self.value == other.value else 0
+	def factorial(self):
+		return DiceValue(fact(self.value))
 	
 	
 	
