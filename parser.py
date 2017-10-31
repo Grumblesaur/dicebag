@@ -17,6 +17,10 @@ def t_newline(t):
 	r'\n+'
 	t.lexer.lineno += t.value.count('\n')
 
+def t_whitespace(t):
+	r'[ \t]+'
+	pass
+
 def t_error(t):
 	raise DiceParserException("Illegal character `%s'" % t.value[0])
 
