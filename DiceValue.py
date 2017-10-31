@@ -61,7 +61,10 @@ class DiceValue(object):
 		return DiceValue(int(log(other, self)))
 	
 	def __eq__(self, other):
-		return self if self.value == other.value else 0
+		return DiceValue(
+			self.value
+		) if self.value == other.value else DiceValue(0)
+	
 	def factorial(self):
 		return DiceValue(fact(self.value))
 	
