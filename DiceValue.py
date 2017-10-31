@@ -60,9 +60,7 @@ class DiceValue(object):
 		return DiceValue(int(math.log(other.value, self.value)))
 	
 	def __eq__(self, other):
-		return DiceValue(
-			self.value
-		) if self.value == other.value else DiceValue(0)
+		return DiceValue(self.value if self.value == other.value else 0)
 	
 	def __lt__(self, other):
 		return self.value < other.value
