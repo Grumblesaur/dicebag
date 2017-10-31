@@ -52,9 +52,11 @@ class DiceValue(object):
 		return DiceValue(self.value ** other.value)
 	
 	def maximum(self, other):
+		print(max(self.value, other.value))
 		return DiceValue(max(self.value, other.value))
 	
 	def minimum(self, other):
+		print(min(self.value, other.value))
 		return DiceValue(min(self.value, other.value))
 	
 	def logarithm(self, other):
