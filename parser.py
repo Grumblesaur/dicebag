@@ -30,7 +30,6 @@ def t_error(t):
 
 precedence = (
 	('left', '='),
-	('left', '#', '_'),
 	('left', '$'),
 	('left', '+', '-'),
 	('left', '*', '/', '%'),
@@ -50,8 +49,6 @@ def p_expr_un(p):
 
 def p_expr_bin(p):
 	''' expr : expr '=' expr
-             | expr '#' expr
-             | expr '_' expr
              | expr '$' expr
              | expr '+' expr
              | expr '-' expr
@@ -64,10 +61,6 @@ def p_expr_bin(p):
     '''
 	if p[2] == '=':
 		p[0] = p[1] == p[3]
-	elif p[2] == '#':
-		p[0] = p[1].maximum(p[3])
-	elif p[2] == '_':
-		p[0] = p[1].minimum(p[3])
 	elif p[2] == '$':
 		p[0] = p[1].concatenate(p[3])
 	elif p[2] == '+':
