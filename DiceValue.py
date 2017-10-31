@@ -1,6 +1,7 @@
 from dice_error import DiceParserException
 from random import randint
 import math
+import sys
 
 class DiceValue(object):
 	def __init__(self, number):
@@ -60,6 +61,7 @@ class DiceValue(object):
 		return DiceValue(int(math.log(other.value, self.value)))
 	
 	def __eq__(self, other):
+		sys.err.write((self.value, 'if', self.value == other.value, 'else', 0))
 		return DiceValue(self.value if self.value == other.value else 0)
 	
 	def __lt__(self, other):
